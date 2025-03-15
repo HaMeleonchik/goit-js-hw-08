@@ -65,14 +65,14 @@ const images = [
     ];
     
 
-    const galleryContainer = document.querySelector(".gallery")
-    galleryContainer.insertAdjacentHTML("beforeend", createMurkup(images))
-    galleryContainer.addEventListener("click", handleClick)
+const galleryContainer = document.querySelector(".gallery")
+galleryContainer.insertAdjacentHTML("beforeend", createMurkup(images))
+galleryContainer.addEventListener("click", handleClick)
 
 
-    function createMurkup(arr) {
-return arr.map((item) => `
-      <li class="gallery-item" data-description="${item.description}">
+function createMurkup(arr) {
+  return arr.map((item) => `
+      <li class="gallery-item">
         <a class="gallery-link" href="${item.original}">
           <img
             class="gallery-image"
@@ -83,35 +83,31 @@ return arr.map((item) => `
         </a>
       </li>
 
-`).join("");
-    }
-    
-    function handleClick(event){
-      event.preventDefault();
-if(event.target === event.currentTarget){
-    return;
+  `).join("");
 }
-const currentPicture = event.target.closest(".gallery-item")
-const pictDescription = currentPicture.dataset.description;
-
-const image = images.find((item) => item.description === pictDescription)
-
-const instance = basicLightbox.create(`
-  <div class="modal">
-  <img src="${image.original}" alt="${image.description}" class="original-image"/>
-  </div>
+    
+function handleClick(event){
+  event.preventDefault();
+  if(event.target.tagName !== "IMG"){
+    return;
+  } 
+  const picSrc = event.target.src;
+  const image = images.find((item) => item.preview === picSrc)
+      
+  const instance = basicLightbox.create(`
+    <img src="${image.original}" alt="${image.description}" class="original-image"/>
   `)
   instance.show()
 
-const imageModal = document.querySelector(".original-image")
-const modalClose = () => instance.close();
-imageModal.addEventListener("click", modalClose)
-    imageModal.style.width ="1112px"
-    imageModal.style.height ="640px"
-    }
+  // modalImg style 
+const modalImg = document.querySelector("img.original-image")
+  modalImg.style.width ="1112px"
+  modalImg.style.height ="640px"
+}
 
 
-    //#region style
+                     //#region style
+    
 // galleryContainer
     galleryContainer.style.marginLeft = "400px"
     galleryContainer.style.display = "flex"
@@ -128,4 +124,4 @@ galleryImage.forEach(galleryImage=>{
   galleryImage.style.objectFit = "cover"
   galleryImage.style.cursor = "zoom-in"
 })
-  //#endregion style
+//#endregion style
