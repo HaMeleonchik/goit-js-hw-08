@@ -1,16 +1,39 @@
 /* default */
-ul{
+ul {
   list-style-type: none;
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 /*img :hover,:focus */
- .gallery-image:hover,:focus{
+.gallery-image:hover,
+:focus {
   transform: scale(1.1);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-} 
+}
 /* basicLightbox */
-.basicLightbox{
+.basicLightbox {
   background-color: rgba(46, 47, 66, 0.8);
+}
+/* modalImg stylecss  */
+img.original-image {
+  width: 1112px !important;
+  height: 640px !important;
+}
+/* Img style */
+.gallery-image {
+  width: 360px;
+  height: 200px;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+  object-fit: cover;
+  cursor: zoom-in;
+}
+/* ul gallery */
+.gallery {
+  margin-left: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 24px;
 }
